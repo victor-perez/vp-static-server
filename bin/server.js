@@ -1,7 +1,8 @@
-var server = require('../src/server'),
-    argv = require('minimist')(process.argv.slice(2)),
-    _ = require('underscore'),
-    config;
+var server  = require('../src/server'),
+    argv    = require('minimist')(process.argv.slice(2)),
+    _       = require('underscore'),
+    path    = require('path'),
+    config  = argv.c || argv.config; //default config file
 // CLI help
 if (argv.h || argv.help) {
   console.log([
@@ -11,6 +12,7 @@ if (argv.h || argv.help) {
     "  -r   --root          Document root to use [./]",
     "  -a   --host          Address to use [0.0.0.0]",
     "  -p   --port          Port to use [3000]",
+    "  -o   --open          Open server URL in your default browser [true]",
     "       --static-*      Express.static options:",
     "                       --static-dotfiles       [ignore]",
     "                       --static-etag           [true]",
@@ -24,8 +26,10 @@ if (argv.h || argv.help) {
   ].join('\n'));
   process.exit();
 }
-//load configuration file
-config = argv.c || argv.config;
+//load config file
+if (config) {
+    config = require(path.normalize(process.cwd() + path.sep + config));
+}
 //parse options 
 if (!config && process.argv.slice(2).length) {
     config = {
@@ -42,6 +46,10 @@ if (!config && process.argv.slice(2).length) {
     //port
     if (argv.p || argv.port) {
         config.port = argv.p || argv.port;
+    }
+    //open
+    if (argv.o || argv.open) {
+        config.open = argv.o || argv.open;
     }
     //static-dotfiles
     if (argv['static-dotfiles']) {

@@ -11,7 +11,7 @@ var express = require('express'),
  * @return {Object} express application
  */
 module.exports = function (configuration)  {
-    var config = _.isString(configuration) ? require(configuration) : configuration || {},
+    var config = configuration || {},
         app = express(),
         server, url;
     /**

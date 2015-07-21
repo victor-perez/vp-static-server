@@ -7,7 +7,8 @@
     "vp-static-server": "bin/server.js"
   },
   "scripts": {
-    "server": "node bin/server.js"
+    "server": "node bin/server",
+    "start": "node ./bin/server -c ./config.json"
   },
   "repository": {
     "type": "git",
