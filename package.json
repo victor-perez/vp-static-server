@@ -1,0 +1,36 @@
+{
+  "name": "vp-static-server",
+  "version": "0.0.1",
+  "description": "Simple static server using express static middleware ",
+  "main": "src/server.js",
+  "bin": {
+    "vp-static-server": "bin/server.js"
+  },
+  "scripts": {
+    "server": "node bin/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victor-perez/vp-static-server.git"
+  },
+  "keywords": [
+    "static",
+    "server",
+    "express",
+    "simple"
+  ],
+  "author": "Victor Verhaagen <vverhaagen@schubergphilis.com>",
+  "license": "Apache License v2.0",
+  "bugs": {
+    "url": "https://github.com/victor-perez/vp-static-server/issues"
+  },
+  "homepage": "https://github.com/victor-perez/vp-static-server",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.13.1",
+    "minimist": "^1.1.1",
+    "open": "0.0.5",
+    "underscore": "^1.8.3"
+  }
+}

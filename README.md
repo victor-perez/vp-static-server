@@ -1,2 +1,3 @@
-# vp-simple-static-server
-Simple static server using express static middleware
+# vp-static-server
+Simple static server using express static middle-ware
+
