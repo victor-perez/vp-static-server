@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var server  = require('../src/server'),
     argv    = require('minimist')(process.argv.slice(2)),
     _       = require('underscore'),
