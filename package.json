@@ -1,6 +1,6 @@
 {
   "name": "vp-static-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple static server using express static middleware ",
   "main": "src/server.js",
   "bin": {
