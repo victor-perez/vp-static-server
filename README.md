@@ -70,7 +70,9 @@ root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
 port | number | 3000 | Port to use
 open | boolean | true | Open server URL in your default browser
-https | boolean | false | Create a ssl server ( HTTPS )
+https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
+https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server
+https.key | string | ssl/127.0.0.1.key | KEY file for ssl server
 static | object | {} | Express.static options [http://expressjs.com/4x/api.html#express.static]
 
 #### example
@@ -99,7 +101,9 @@ root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
 port | number | 3000 | Port to use
 open | boolean | true | Open server URL in your default browser
-https | boolean | false | Create a ssl server ( HTTPS )
+https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
+https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server
+https.key | string | ssl/127.0.0.1.key | KEY file for ssl server
 static | object | {} | Express.static options [http://expressjs.com/4x/api.html#express.static]
 
 #### example
