@@ -48,6 +48,9 @@ var server = require('vp-static-server'),
 -a   --host          Address to use [0.0.0.0]                                   
 -p   --port          Port to use [3000]
 -o   --open          Open server URL in your default browser [true]
+-s   --https         Create a ssl server ( HTTPS ) [false]
+     --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]
+     --https-key     KEY file for ssl server [ssl/127.0.0.1.key]
      --static-*      Express.static options:                                    
                      --static-dotfiles       [ignore]                           
                      --static-etag           [true]                             
@@ -67,6 +70,9 @@ root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
 port | number | 3000 | Port to use
 open | boolean | true | Open server URL in your default browser
+https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
+https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server
+https.key | string | ssl/127.0.0.1.key | KEY file for ssl server
 static | object | {} | Express.static options [http://expressjs.com/4x/api.html#express.static]
 
 #### example
@@ -83,7 +89,8 @@ static | object | {} | Express.static options [http://expressjs.com/4x/api.html#
     },
     "host": "0.0.0.0",
     "port": 3000,
-    "open": true
+    "open": true,
+    "https": false
 }
 ```
 ### scripting
@@ -94,6 +101,9 @@ root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
 port | number | 3000 | Port to use
 open | boolean | true | Open server URL in your default browser
+https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
+https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server
+https.key | string | ssl/127.0.0.1.key | KEY file for ssl server
 static | object | {} | Express.static options [http://expressjs.com/4x/api.html#express.static]
 
 #### example
@@ -111,7 +121,8 @@ var server = require('vp-static-server'),
         },
         host: "0.0.0.0",
         port: 3000,
-        open: true
+        open: true,
+        https: false
     },
     app = server(options); //returns express application
 ```

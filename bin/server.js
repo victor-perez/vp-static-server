@@ -3,6 +3,7 @@ var server  = require('../src/server'),
     argv    = require('minimist')(process.argv.slice(2)),
     _       = require('underscore'),
     path    = require('path'),
+    fs      = require('fs'),
     config  = argv.c || argv.config; //default config file
 // CLI help
 if (argv.h || argv.help) {
@@ -14,6 +15,9 @@ if (argv.h || argv.help) {
     "  -a   --host          Address to use [0.0.0.0]",
     "  -p   --port          Port to use [3000]",
     "  -o   --open          Open server URL in your default browser [true]",
+    "  -s   --https         Create a ssl server ( HTTPS ) [false]",
+    "       --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]",
+    "       --https-key     KEY file for ssl server [ssl/127.0.0.1.key]",
     "       --static-*      Express.static options:",
     "                       --static-dotfiles       [ignore]",
     "                       --static-etag           [true]",
@@ -34,7 +38,7 @@ if (config) {
 //parse options 
 if (!config && process.argv.slice(2).length) {
     config = {
-        static: {}
+        static: {},
     };
     //root
     if (argv.r || argv.root) {
@@ -51,6 +55,17 @@ if (!config && process.argv.slice(2).length) {
     //open
     if (argv.o || argv.open) {
         config.open = argv.o || argv.open;
+    }
+    //set own cert & key
+    if (argv['https-cert'] && argv['https-key']) {
+        config.https = {
+            key: fs.readFileSync(path.normalize(argv['https-key'])),
+            cert: fs.readFileSync(path.normalize(argv['https-cert']))
+        };
+    }
+    //https ( easy )
+    if (!config.https && (argv.s || argv.https)) {
+        config.https = true;
     }
     //static-dotfiles
     if (argv['static-dotfiles']) {
