@@ -5,6 +5,32 @@ var server  = require('../src/server'),
     path    = require('path'),
     fs      = require('fs'),
     config  = argv.c || argv.config; //default config file
+/**
+ * Check of one of the given arguments is defined
+ * @params {..*}
+ * @return {Boolean} true if one or more of th arg. is defined
+ */
+function def () {
+    var arg = _.toArray(arguments);
+    for (var i = 0, max = arg.length; i < max; i++) {
+        if (typeof arg[i] !== "undefined") {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * Return first argument that is not undefined
+ * @return {*}
+ */
+function first () {
+    var arg = _.toArray(arguments);
+    for (var i = 0, max = arg.length; i < max; i++) {
+        if (typeof arg[i] !== "undefined") {
+            return arg[i];
+        }
+    }   
+}
 // CLI help
 if (argv.h || argv.help) {
   console.log([
@@ -31,6 +57,17 @@ if (argv.h || argv.help) {
   ].join('\n'));
   process.exit();
 }
+//fix the use of the string true and false
+_.forEach(argv, function (value, key) {
+    //false
+    if (value === 'false') {
+        argv[key] = false;
+    }
+    //true 
+    if (value === 'true') {
+        argv[key] = true;
+    }
+});
 //load config file
 if (config) {
     config = require(path.normalize(process.cwd() + path.sep + config));
@@ -41,20 +78,20 @@ if (!config && process.argv.slice(2).length) {
         static: {},
     };
     //root
-    if (argv.r || argv.root) {
-        config.root = argv.r || argv.root;
+    if (def(argv.r, argv.root)) {
+        config.root = first(argv.r, argv.root);
     }
     //host
-    if (argv.a || argv.host) {
-        config.host = argv.a || argv.host;
+    if (def(argv.a, argv.host)) {
+        config.host = first(argv.a, argv.host);
     }
     //port
-    if (argv.p || argv.port) {
-        config.port = argv.p || argv.port;
+    if (def(argv.p, argv.port)) {
+        config.port = first(argv.p, argv.port);
     }
     //open
-    if (argv.o || argv.open) {
-        config.open = argv.o || argv.open;
+    if (def(argv.o, argv.open)) {
+        config.open = first(argv.o, argv.open);
     }
     //set own cert & key
     if (argv['https-cert'] && argv['https-key']) {
@@ -64,33 +101,34 @@ if (!config && process.argv.slice(2).length) {
         };
     }
     //https ( easy )
-    if (!config.https && (argv.s || argv.https)) {
+    if (!config.https && def(argv.s, argv.https)) {
         config.https = true;
     }
     //static-dotfiles
-    if (argv['static-dotfiles']) {
+    if (_.has(argv, 'static-dotfiles')) {
         config.static.dotfiles = argv['static-dotfiles'];
     }
     //static-etag
-    if (!_.isUndefined(argv['static-etag'])) {
+    if (_.has(argv, 'static-etag')) {
         config.static.etag = argv['static-etag'];
     }
     //static-index
-    if (!_.isUndefined(argv['static-index'])) {
+    if (_.has(argv, 'static-index')) {
         config.static.index = argv['static-index'];
     }
     //static-lastmodified
-    if (!_.isUndefined(argv['static-lastmodified'])) {
+    if (_.has(argv, 'static-lastmodified')) {
         config.static.lastModified = argv['static-lastmodified'];
     }
     //static-maxage
-    if (!_.isUndefined(argv['static-maxage'])) {
+    if (_.has(argv, 'static-maxage')) {
         config.static.maxAge = argv['static-maxage'];
     }
     //static-redirect
-    if (!_.isUndefined(argv['static-redirect'])) {
+    if (_.has(argv, 'static-redirect')) {
         config.static.redirect = argv['static-redirect'];
     }
 }
+console.log(config);
 //start server
-server(config);
+//server(config);

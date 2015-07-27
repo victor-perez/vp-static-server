@@ -1,14 +1,15 @@
 {
   "name": "vp-static-server",
-  "version": "0.0.3",
-  "description": "Simple static server using express static middleware ",
+  "version": "0.0.4",
+  "description": "Simple static server using express static middleware works both on HTTP and HTTPS",
   "main": "src/server.js",
   "bin": {
-    "vp-static-server": "bin/server.js"
+    "vp-static-server": "bin/server",
+    "vpss": "bin/server"
   },
   "scripts": {
     "server": "node bin/server",
-    "start": "node ./bin/server -c ./config.json"
+    "start": "node ./bin/server -c ./vp-static-server.json"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,13 @@
     "static",
     "server",
     "express",
-    "simple"
+    "simple",
+    "http",
+    "https",
+    "assets",
+    "local",
+    "tool",
+    "serve"
   ],
   "author": "Victor Verhaagen <vverhaagen@schubergphilis.com>",
   "license": "Apache License v2.0",

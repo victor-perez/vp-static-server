@@ -19,6 +19,7 @@ Simple static server using express static middle-ware
 
 ### global
 `vp-static-server [options]`
+`vpss [options]`
 
 ### node
 `node bin/server [options]`
@@ -29,7 +30,7 @@ this works only by npm > 2
 `npm run server -- [options]`
 
 ### npm start
-will always run `node bin/server -c ./config.json`
+will always run `node bin/server -c ./vp-static-server.json`
 
 `npm start`
 
