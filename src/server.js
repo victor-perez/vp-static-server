@@ -69,7 +69,7 @@ module.exports = function (configuration)  {
         //set url
         url = util.format('%s://%s:%s', proto, host, port);
         //log
-        console.log(colors.magenta('vp-simple-server') + ' listening at ' + colors.green(url), host, port);
+        console.log(colors.magenta('vp-simple-server') + ' listening at ' + colors.green(url));
         //open URL in default browser?²
         if (config.open) {
             openUrl(host, port, proto);

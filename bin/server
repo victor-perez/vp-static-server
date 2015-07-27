@@ -13,7 +13,7 @@ var server  = require('../src/server'),
 function def () {
     var arg = _.toArray(arguments);
     for (var i = 0, max = arg.length; i < max; i++) {
-        if (typeof arg[i] !== "undefined") {
+        if (typeof arg[i] !== 'undefined') {
             return true;
         }
     }
@@ -26,7 +26,7 @@ function def () {
 function first () {
     var arg = _.toArray(arguments);
     for (var i = 0, max = arg.length; i < max; i++) {
-        if (typeof arg[i] !== "undefined") {
+        if (typeof arg[i] !== 'undefined') {
             return arg[i];
         }
     }   
@@ -34,26 +34,30 @@ function first () {
 // CLI help
 if (argv.h || argv.help) {
   console.log([
-    "usage: vp-static-server [options]",
-    "",
-    "options:",
-    "  -r   --root          Document root to use [./]",
-    "  -a   --host          Address to use [0.0.0.0]",
-    "  -p   --port          Port to use [3000]",
-    "  -o   --open          Open server URL in your default browser [true]",
-    "  -s   --https         Create a ssl server ( HTTPS ) [false]",
-    "       --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]",
-    "       --https-key     KEY file for ssl server [ssl/127.0.0.1.key]",
-    "       --static-*      Express.static options:",
-    "                       --static-dotfiles       [ignore]",
-    "                       --static-etag           [true]",
-    "                       --static-index          [index.html]",
-    "                       --static-lastmodified   [true]",
-    "                       --static-maxage         [0]",
-    "                       --static-redirect       [true]",
-    "                       more info http://expressjs.com/4x/api.html#express.static",
-    "  -c   --config        Path to the configuration file",
-    "  -h   --help          Print this list and exit.",
+    'VP Simple Server',    
+    'usage: vp-static-server [options]',
+    'or for short use vpss [options]',
+    '',
+    'options:',
+    '-r   --root          Document root to use [./]',
+    '-a   --host          Address to use [0.0.0.0]',
+    '-p   --port          Port to use [3000]',
+    '-o   --open          Open server URL in your default browser [true]',
+    '-s   --https         Create a ssl server ( HTTPS ) [false]',
+    '     --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]',
+    '     --https-key     KEY file for ssl server [ssl/127.0.0.1.key]',
+    '     --static-*      Express.static options:',
+    '                     --static-dotfiles       [ignore]',
+    '                     --static-etag           [true]',
+    '                     --static-index          [index.html]',
+    '                     --static-lastmodified   [true]',
+    '                     --static-maxage         [0]',
+    '                     --static-redirect       [true]',
+    '                     more info http://expressjs.com/4x/api.html#express.static',
+    '-c   --config        Path to the configuration file',
+    '-h   --help          Print this list and exit.',
+    '',
+    'more info https://github.com/victor-perez/vp-static-server'
   ].join('\n'));
   process.exit();
 }
@@ -129,6 +133,5 @@ if (!config && process.argv.slice(2).length) {
         config.static.redirect = argv['static-redirect'];
     }
 }
-console.log(config);
 //start server
-//server(config);
+server(config);
