@@ -50,7 +50,7 @@ var server = require('vp-static-server'),
 ```
 -r   --root          Document root to use [./]                                  
 -a   --host          Address to use [0.0.0.0]                                   
--p   --port          Port to use \[0\] ( auto select )
+-p   --port          Port to use [0] ( auto select )
 -o   --open          Open server URL in your default browser [true]
 -s   --https         Create a ssl server ( HTTPS ) [false]
      --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]
