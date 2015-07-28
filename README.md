@@ -19,6 +19,9 @@ Simple static server using express static middle-ware
 
 ### global
 `vp-static-server [options]`
+
+or
+
 `vpss [options]`
 
 ### node
@@ -43,11 +46,11 @@ var server = require('vp-static-server'),
 
 ## Options
 
-### node & npm run
+### cli, node & npm run
 ```
 -r   --root          Document root to use [./]                                  
 -a   --host          Address to use [0.0.0.0]                                   
--p   --port          Port to use [3000]
+-p   --port          Port to use \[0\] ( auto select )
 -o   --open          Open server URL in your default browser [true]
 -s   --https         Create a ssl server ( HTTPS ) [false]
      --https-cert    CERT file for ssl server [ssl/127.0.0.1.cert]
@@ -69,7 +72,7 @@ Name | Type | Default | Description
 --- | --- | --- | ---
 root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
-port | number | 3000 | Port to use
+port | number | 0 | Port to use 0 = auto select
 open | boolean | true | Open server URL in your default browser
 https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
 https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server
@@ -100,7 +103,7 @@ Name | Type | Default | Description
 --- | --- | --- | ---
 root | string | ./ | Document root to use
 host | string | 0.0.0.0 | Address to use
-port | number | 3000 | Port to use
+port | number | 0 | Port to use 0 = auto select
 open | boolean | true | Open server URL in your default browser
 https | boolean\|object | false | Create a ssl server ( HTTPS ), if `true` it will use ssl/127.0.0.1.(cert\|key)
 https.cert | string | ssl/127.0.0.1.cert | CERT file for ssl server

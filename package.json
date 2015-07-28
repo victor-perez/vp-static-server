@@ -1,6 +1,6 @@
 {
   "name": "vp-static-server",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple static server using express static middleware works both on HTTP and HTTPS",
   "main": "src/server.js",
   "bin": {
@@ -27,7 +27,7 @@
     "tool",
     "serve"
   ],
-  "author": "Victor Verhaagen <vverhaagen@schubergphilis.com>",
+  "author": "V.A. Perez <js@victor-perez.nl>",
   "license": "Apache License v2.0",
   "bugs": {
     "url": "https://github.com/victor-perez/vp-static-server/issues"
