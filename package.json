@@ -9,7 +9,8 @@
   },
   "scripts": {
     "server": "node bin/server",
-    "start": "node ./bin/server -c ./vp-static-server.json"
+    "start": "node ./bin/server -c ./vp-static-server.json",
+    "test": "cd test && mocha spec"
   },
   "repository": {
     "type": "git",
@@ -40,5 +41,10 @@
     "minimist": "^1.1.1",
     "open": "0.0.5",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.2",
+    "supertest": "^1.0.1"
   }
 }
