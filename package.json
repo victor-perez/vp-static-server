@@ -2,7 +2,7 @@
   "name": "vp-static-server",
   "version": "0.0.5",
   "description": "Simple static server using express static middleware works both on HTTP and HTTPS",
-  "main": "src/server.js",
+  "main": "lib/server.js",
   "bin": {
     "vp-static-server": "bin/server",
     "vpss": "bin/server"
@@ -10,7 +10,7 @@
   "scripts": {
     "server": "node bin/server",
     "start": "node ./bin/server -c ./vp-static-server.json",
-    "test": "cd test && mocha spec"
+    "test": "cd test && node ../node_modules/mocha/bin/mocha --recursive spec"
   },
   "repository": {
     "type": "git",

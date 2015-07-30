@@ -1,41 +1,11 @@
-var server      = require('../../src/server.js'),
-    request     = require('supertest'),
+var server      = require('../../../lib/server.js'),
     should      = require('should'),
     assert      = require('assert'),
     fs          = require('fs'),
     path        = require('path'),
-    util        = require('util'),
-    indexHTML   = String(fs.readFileSync(path.normalize(__dirname + '/../test-data/index.html')));
-
-function getServer (app) {
-    var server = app.get('http');
-    return [server || app.get('https'), !server];
-}
-
-function close (app) {
-    return function (done) {
-        getServer(app)[0].close(done);
-    };
-}
-function onConnect (app) {
-    return function (done) {
-        getServer(app)[0].getConnections(done);
-    };
-}
-function agent(app) {
-    var server = getServer(app),
-        proto = server[1] ? 'https' : 'http',  
-        host = server[0].address().address,
-        port = server[0].address().port;
-    //fix local host
-    if (host === '0.0.0.0') {
-        host = '127.0.0.1';
-    }
-    //return request
-    return request(
-        util.format('%s://%s:%s', proto, host, port)
-    );
-}
+    helpers     = require('../../helpers'),
+    indexHTML   = String(fs.readFileSync(path.normalize(__dirname + '/../../test-data/index.html'))),
+    index2HTML   = String(fs.readFileSync(path.normalize(__dirname + '/../../test-data/index2.html')));
 
 
 describe('HTTP server.js', function () {
@@ -45,11 +15,11 @@ describe('HTTP server.js', function () {
                 open: false
             });
 
-        before(onConnect(app));
-        after(close(app));
+        before(helpers.onConnect(app));
+        after(helpers.close(app));
 
         it('should return the content of /test-data/test.txt', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test-data/test.txt')
             .expect(200)
             .expect('Victor')
@@ -60,7 +30,7 @@ describe('HTTP server.js', function () {
         });
 
         it('should return index.html', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test-data/')
             .expect(200)
             .expect(indexHTML)
@@ -71,7 +41,7 @@ describe('HTTP server.js', function () {
         });
 
         it('should return a 404', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test-data/404')
             .expect(404)
             .end(function (err, res) {
@@ -87,15 +57,15 @@ describe('HTTP server.js', function () {
                 host: '127.0.0.1'
             });
 
-        before(onConnect(app));
-        after(close(app));        
+        before(helpers.onConnect(app));
+        after(helpers.close(app));        
 
         it('should return address 127.0.0.1', function () {
-            assert.equal(getServer(app)[0].address().address, '127.0.0.1');
+            assert.equal(helpers.getServer(app)[0].address().address, '127.0.0.1');
         });
 
         it('should return the content of /test-data/test.txt', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test-data/test.txt')
             .expect(200)
             .expect('Victor')
@@ -112,15 +82,15 @@ describe('HTTP server.js', function () {
                 port: 3001
             });
         
-        before(onConnect(app));
-        after(close(app));                
+        before(helpers.onConnect(app));
+        after(helpers.close(app));                
 
         it('should return port 3001', function () {
-            assert.equal(getServer(app)[0].address().port, '3001');
+            assert.equal(helpers.getServer(app)[0].address().port, '3001');
         });
 
         it('should return the content of /test-data/test.txt', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test-data/test.txt')
             .expect(200)
             .expect('Victor')
@@ -137,11 +107,11 @@ describe('HTTP server.js', function () {
                 root: './test-data/'
             });
         
-        before(onConnect(app));
-        after(close(app));                
+        before(helpers.onConnect(app));
+        after(helpers.close(app));                
 
         it('should return the content of /test.txt', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/test.txt')
             .expect(200)
             .expect('Victor')
@@ -153,7 +123,7 @@ describe('HTTP server.js', function () {
 
 
         it('should return index.html', function (done) {
-            agent(app)
+            helpers.agent(app)
             .get('/')
             .expect(200)
             .expect(indexHTML)
@@ -163,4 +133,54 @@ describe('HTTP server.js', function () {
             });
         });
     });
+
+    context('option: static.index', function (){
+        var app = server({
+                open: false,
+                static: {
+                    index: 'index2.html'
+                }
+            });
+        
+        before(helpers.onConnect(app));
+        after(helpers.close(app));                
+
+        it('should return index2.html', function (done) {
+            helpers.agent(app)
+            .get('/test-data/')
+            .expect(200)
+            .expect(index2HTML)
+            .end(function (err, res) {
+                should.not.exist(err);
+                done();
+            });
+        });
+    });
+
+
+    context('option: static.setHeaders', function (){
+        var app = server({
+                open: false,
+                static: {
+                    setHeaders: function (res) {
+                        res.set('X-HTTP-TEST', 'Perez');
+                    }
+                }
+            });
+        
+        before(helpers.onConnect(app));
+        after(helpers.close(app));                
+
+        it('should have the header X-HTTP-TEST', function (done) {
+            helpers.agent(app)
+            .get('/test-data/')
+            .expect(200)
+            .expect('X-HTTP-TEST', 'Perez')
+            .end(function (err, res) {
+                should.not.exist(err);
+                done();
+            });
+        });
+    });
+
 });
