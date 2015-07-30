@@ -130,3 +130,6 @@ var server = require('vp-static-server'),
     },
     app = server(options); //returns express application
 ```
+
+## Testing
+`npm test`

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var server  = require('../src/server'),
+var server  = require('../lib/server'),
     argv    = require('minimist')(process.argv.slice(2)),
     _       = require('underscore'),
     path    = require('path'),
