@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/vp-static-server.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vp-static-server/)
+
 vp-static-server
 ======
 Simple static server using express static middle-ware
