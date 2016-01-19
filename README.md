@@ -1,3 +1,6 @@
+[![Dependency Status](https://david-dm.org/victor-perez/vp-static-server.svg)](https://david-dm.org/victor-perez/vp-static-server)
+[![devDependency Status](https://david-dm.org/victor-perez/vp-static-server/dev-status.svg)](https://david-dm.org/victor-perez/vp-static-server#info=devDependencies)
+
 [![NPM](https://nodei.co/npm/vp-static-server.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vp-static-server/)
 
 vp-static-server
