@@ -1,1 +1,5 @@
-{}
+{
+    "http2": true,
+    "port": 1800,
+    "open": false
+}
