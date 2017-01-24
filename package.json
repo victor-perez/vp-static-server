@@ -29,7 +29,7 @@
     "serve"
   ],
   "author": "V.A. Perez <js@victor-perez.nl>",
-  "license": "Apache License v2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/victor-perez/vp-static-server/issues"
   },
@@ -43,8 +43,8 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "mocha": "^2.2.5",
-    "should": "^7.0.2",
-    "supertest": "^1.0.1"
+    "mocha": "^3.2.0",
+    "should": "^11.1.2",
+    "supertest": "^2.0.1"
   }
 }
