@@ -14,7 +14,7 @@ Simple static server using express static middle-ware
 #### Global
 `npm install vp-static-server -g`
 
-#### Project dependencie 
+#### Project dependencie
 `npm install vp-static-server --save`
 
 #### GIT
@@ -135,6 +135,36 @@ var server = require('vp-static-server'),
     },
     app = server(options); //returns express application
 ```
+
+#### example delay start
+if you want to add middleware before the static middleware you can set `autostart` to `false` and call yourself `vpStart()` to start the server
+
+```javascript
+var server = require('vp-static-server'),
+    options = {
+        root: "./",
+        static: {
+            dotfiles: "ignore",
+            etag: true,
+            index: "index.html",
+            lastModified: true,
+            maxAge: 0,
+            redirect: true
+        },
+        host: "0.0.0.0",
+        port: 3000,
+        open: true,
+        https: false
+    },
+    app = server(options, false); //returns express application
+    .use((req, res, next) = > {
+        console.log('log');
+        next();
+    });
+	//start the server
+    app.vpStart();
+```
+
 
 ## Testing
 `npm test`
