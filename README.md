@@ -14,7 +14,7 @@ Simple static server using express static middle-ware
 #### Global
 `npm install vp-static-server -g`
 
-#### Project dependencie
+#### Project dependency
 `npm install vp-static-server --save`
 
 #### GIT
